@@ -8,6 +8,12 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+    ports:
+      - "9000:9000"
+      - "8000:8000"
+      expose:
+        - 9000
+        - 8000
     labels:
       # Frontend
       - "traefik.enable=true"
@@ -15,7 +21,7 @@ services:
       - "traefik.http.routers.frontend.rule=Host(`le-5ra.de`, `www.le-5ra.de`) "
       - "traefik.http.routers.frontend.middlewares=secureHeaders@file"
 #      - "traefik.http.routers.frontend.entrypoints=websecure"
-      - "traefik.http.services.frontend.loadbalancer.server.port=9000"
+#      - "traefik.http.services.frontend.loadbalancer.server.port=9000"
       - "traefik.http.routers.frontend.service=frontend"
       - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
       - "traefik.http.routers.frontend.priority=900"
