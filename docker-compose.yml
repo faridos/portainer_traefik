@@ -8,11 +8,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-#    ports:
-#      - "9000:9000"
+    ports:
+      - "9000:9000"
 #      - "8000:8000"
-#    expose:
-#      - 9000
+    expose:
+      - 9000
 #      - 8000
     labels:
       # Frontend
@@ -26,17 +26,6 @@ services:
       - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
       - "traefik.http.routers.frontend.priority=900"
       - "traefik.http.routers.frontend.tls=true"
-
-      # Edge
-      - "traefik.http.routers.edge.rule=Host(`edge.le-5ra.de`)"
-      - "traefik.http.routers.edge.middlewares=secureHeaders@file"
-#      - "traefik.http.routers.edge.entrypoints=websecure"
-      - "traefik.http.services.edge.loadbalancer.server.port=8000"
-        #     - "traefik.http.routers.edge.service=edge"
-      - "traefik.http.routers.edge.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.edge.priority=800"
-      - "traefik.http.routers.edge.tls=true"
-
 
 volumes:
   portainer_data:
